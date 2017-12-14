@@ -1,0 +1,38 @@
+package com.example.venky.qrcodedreceipts;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.content.SharedPreferences;
+import android.widget.EditText;
+import android.view.View;
+
+public class ChangePassword extends AppCompatActivity {
+    String un;
+    EditText et_oldpass,et_newpass;
+    String oldpass,newpass;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_change_password);
+
+        SharedPreferences sharedPreferences=ChangePassword.this.getSharedPreferences(getString(R.string.pref_file),MODE_PRIVATE);
+
+        //SharedPreferences sharedPreferences=login.this.getSharedPreferences(getString(R.string.pref_file),MODE_PRIVATE);
+        un=sharedPreferences.getString(getString(R.string.pref_username),"");
+
+    }
+
+    public void update_pwd(View v)
+    {
+        et_oldpass=(EditText)findViewById(R.id.editText8);
+        et_newpass=(EditText)findViewById(R.id.editText9);
+        oldpass=et_oldpass.getText().toString();
+        newpass=et_newpass.getText().toString();
+
+        String urlSuffix = "?username="+un+"&old_password="+oldpass+"&new_password="+newpass;
+        BackgroundTaskChange backgroundTaskChange=new BackgroundTaskChange(this);
+        // backgroundTask.execute(method,username,password,phone);
+        backgroundTaskChange.execute(urlSuffix);
+    }
+}

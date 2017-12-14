@@ -1,0 +1,21 @@
+<?php
+		$name=$_GET['name'];
+		$username = $_GET['username'];
+$password = $_GET['password'];
+		$email= $_GET['email'];
+
+$con=mysqli_connect("mysql.hostinger.in","u482683992_babi","babitha","u482683992_qr");
+require_once('connectionBabi.php');
+
+							
+$sql = "INSERT INTO try(name,username,password,email) VALUES ('$name','$username','$password','$email')";
+				if(mysqli_query($con,$sql))
+				{
+					echo 'success registered';
+				}
+				else{
+					echo 'oops! Please try again!';
+				}
+			
+			mysqli_close($con);
+?>

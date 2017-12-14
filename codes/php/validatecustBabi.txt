@@ -1,0 +1,32 @@
+<?php
+
+$text=$_GET['scan_text'];
+/*$text="babitharayapati";*/
+
+$con=mysqli_connect("mysql.hostinger.in","u482683992_babi","babitha","u482683992_qr");
+require_once('connectionBabi.php');
+
+
+$sql="SELECT * from login where username like '$text'";
+
+$res=mysqli_query($con,$sql);
+
+/*if(mysqli_query($con,$sql))
+				{
+					echo 'success updated';
+				}
+				else{
+					echo 'oops! Please try again!';
+				}
+			
+			mysqli_close($con);*/
+
+if(mysqli_num_rows($res) > 0){
+    echo "valid";
+}else
+{
+echo "invalid";
+}
+
+mysqli_close($con);
+?>

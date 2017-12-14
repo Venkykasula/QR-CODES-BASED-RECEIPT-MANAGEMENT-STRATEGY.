@@ -1,0 +1,18 @@
+<?php
+		$combinedString=$_GET['combinedString'];
+		list($c_id,$product_name,$product_category,$price,$purchase_date)=explode(";",$combinedString);
+
+$con=mysqli_connect("mysql.hostinger.in","u482683992_babi","babitha","u482683992_qr");
+require_once('connectionBabi.php');
+							
+$sql = "INSERT INTO purchase (c_id,product_name,product_category,price,purchase_date) VALUES ('$c_id','$product_name','$product_category','$price','$purchase_date')";
+				if(mysqli_query($con,$sql))
+				{
+					echo 'successfully stored';
+				}
+				else{
+					echo 'oops! Please try again!';
+				}
+			
+			mysqli_close($con);
+?>

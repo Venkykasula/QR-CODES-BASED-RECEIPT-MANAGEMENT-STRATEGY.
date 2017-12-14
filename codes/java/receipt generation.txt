@@ -1,0 +1,67 @@
+package com.example.venky.qrcodedreceipts;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
+import android.widget.Spinner;
+
+public class ReceiptGeneration extends AppCompatActivity {
+    EditText et_username,et_productname,et_price,et_date;
+    Spinner product_category;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_receipt_generation);
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EditText editText6=(EditText)findViewById(R.id.editText6);
+        /*textdate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if(hasFocus)
+                {
+                    DateDialog dialog=new DateDialog(view);
+                    android.app.FragmentTransaction ft=getFragmentManager().beginTransaction();
+                    dialog.show(ft,"DialogPicker");
+                }
+            }
+        });*/
+        editText6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DateDialog dialog=new DateDialog(view);
+                android.app.FragmentTransaction ft=getFragmentManager().beginTransaction();
+                dialog.show(ft,"DialogPicker");
+
+            }
+        });
+    }
+    public void generate(View view)
+    {
+        et_username=(EditText)findViewById(R.id.editText3);
+        product_category=(Spinner)findViewById(R.id.spinner);
+        et_productname=(EditText)findViewById(R.id.editText4);
+        et_price=(EditText)findViewById(R.id.editText7);
+        et_date=(EditText)findViewById(R.id.editText6);
+        Intent i = new Intent(this, QRImageDisplay.class);
+        i.putExtra("username", et_username.getText().toString());
+        i.putExtra("category", product_category.getSelectedItem().toString());
+        i.putExtra("productname", et_productname.getText().toString());
+        i.putExtra("price", et_price.getText().toString());
+        i.putExtra("date", et_date.getText().toString());
+        startActivity(i);
+    }
+
+    public void paper_receipts(View view)
+    {
+
+    }
+
+
+}

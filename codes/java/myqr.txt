@@ -1,0 +1,58 @@
+package com.example.venky.qrcodedreceipts;
+
+import android.graphics.Bitmap;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.content.SharedPreferences;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
+
+
+public class MyQR extends AppCompatActivity {
+    String un;
+    Button show_btn;
+    ImageView imageMyQR;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_qr);
+
+        SharedPreferences sharedPreferences=MyQR.this.getSharedPreferences(getString(R.string.pref_file),MODE_PRIVATE);
+
+        //SharedPreferences sharedPreferences=login.this.getSharedPreferences(getString(R.string.pref_file),MODE_PRIVATE);
+        un=sharedPreferences.getString(getString(R.string.pref_username),"error");
+
+        //editText.setText(un);
+       // Toast.makeText(getApplicationContext(), un, Toast.LENGTH_LONG).show();
+        show_btn=(Button)findViewById(R.id.buttonshow);
+        imageMyQR=(ImageView)findViewById(R.id.imageMyQR);
+        show_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //text2Qr=text.getText().toString().trim();
+                MultiFormatWriter multiFormatWriter=new MultiFormatWriter();
+                try {
+                    BitMatrix bitMatrix=multiFormatWriter.encode(un, BarcodeFormat.QR_CODE,200,200);
+                    BarcodeEncoder barcodeEncoder=new BarcodeEncoder();
+                    Bitmap bitmap=barcodeEncoder.createBitmap(bitMatrix);
+                    imageMyQR.setImageBitmap(bitmap);
+                }
+                catch (WriterException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+    }
+}

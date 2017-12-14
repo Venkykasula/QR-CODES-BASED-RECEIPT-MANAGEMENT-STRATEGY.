@@ -1,0 +1,18 @@
+<?php
+require_once('connectionBabi.php');
+$username=$_POST["username"];
+$password=$_POST["password"];
+$con=mysqli_connect("mysql.hostinger.in","u482683992_babi","babitha","u482683992_qr");
+$sql ="SELECT phone from login where username like '$username' and password like '$password';";
+$res=mysqli_query($con,$sql);
+if(mysqli_num_rows($res)>0)
+{
+$row=mysqli_fetch_assoc($res);
+$phone=$row["phone"];
+echo "yes";
+}
+else
+{
+echo "no";
+}
+?>

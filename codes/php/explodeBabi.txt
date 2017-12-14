@@ -1,0 +1,21 @@
+<?php
+		$str=$_GET['scan_text'];
+		
+		/*$str="babi;ac;lg;20000;03-11-2016";*/
+		$arr=explode(';',$str);
+		
+$con=mysqli_connect("mysql.hostinger.in","u482683992_babi","babitha","u482683992_qr");
+require_once('connectionBabi.php');
+
+							
+$sql = "INSERT INTO purchase(username,product_category,product_name,price,purchase_date) VALUES ('$arr[0]','$arr[1]','$arr[2]','$arr[3]','$arr[4]')";
+				if(mysqli_query($con,$sql))
+				{
+					echo 'inserted';
+				}
+				else{
+					echo 'oops! Please try again!';
+				}
+			
+			mysqli_close($con);
+?>

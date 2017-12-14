@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.venky.qrcodedreceipts.slideshow">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <ViewFlipper
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/viewFlipper"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" >
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageView"
+                android:src="@drawable/sld2"/>
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageView2"
+                android:src="@drawable/sld1"/>
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageView3"
+                android:src="@drawable/sld3"/>
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageView4"
+                android:src="@drawable/sld4"/>
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageView5"
+                android:src="@drawable/sld5"/>
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/imageView6"
+                android:src="@drawable/sld6"/>
+        </ViewFlipper>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">QR coded receipts</string>
+    <string name="signinText">SignIn!</string>
+    <string name="customer">customer</string>
+    <string name="retailer">retailer</string>
+    <string name="signin_asText">signin as:</string>
+    <string name="loginText">Login</string>
+    <string name="generate_receipts" />
+    <string name="read_customer" />
+    <string name="analyse_customer" />
+    <string name="logout" />
+    <string name="change_passwordRetailer" />
+    <string-array name="productcategory_items">
+        <item>mobile</item>
+        <item>television</item>
+        <item>air conditioner</item>
+        <item>laptop</item>
+    </string-array>
+    <string-array name="search_with">
+        <item>product name</item>
+        <item>purchase date</item>
+    </string-array>
+    <string name="pref_file">app_pref_file</string>
+    <string name="pref_username">app_username</string>
+    <string name="pref_scanname">app_scanname</string>
+    <string name="action_settings">Settings</string>
+</resources>

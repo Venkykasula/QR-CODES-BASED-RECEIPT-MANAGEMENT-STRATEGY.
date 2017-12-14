@@ -1,0 +1,174 @@
+package com.example.venky.qrcodedreceipts;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.content.Intent;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.content.SharedPreferences;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.widget.Toast;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.math.BigInteger;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+
+
+
+public class login extends AppCompatActivity {
+    private RadioGroup loginType;
+    EditText t1,t2,prf_un;
+    String un, pwd, p, phone;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        loginType=(RadioGroup)findViewById(R.id.radioGroup);
+        t1 = (EditText) findViewById(R.id.editText);
+        t2 = (EditText) findViewById(R.id.editText2);
+        prf_un = (EditText) findViewById(R.id.editText);
+
+    }
+    public void meth(View v)
+    {
+        int selectedId=loginType.getCheckedRadioButtonId();
+        RadioButton selectedRadioButton = (RadioButton)findViewById(selectedId);
+        String radioButtonText = selectedRadioButton.getText().toString();
+        if(radioButtonText.matches("retailer"))
+        {
+            if(t1.getText().toString().equals("babitha")&&t2.getText().toString().equals("babitha"))
+            {
+                Intent i=new Intent(login.this,retailer.class);
+                startActivity(i);
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(), "invalid details", Toast.LENGTH_LONG).show();
+
+            }
+
+        }
+        else if(radioButtonText.matches("customer"))
+        {
+            String u = t1.getText().toString();
+            String p = t2.getText().toString();
+            new SigninActivity(this).execute(u, p);
+
+           /* Intent in=new Intent(login.this,Customer.class);
+            startActivity(in);*/
+        }
+
+       /* boolean checked=((RadioButton) v).isChecked();
+        switch (v.getId()) {
+            case R.id.user_retailer:
+                if(checked) {
+                    Intent i = new Intent(login.this, retailer.class);
+                    startActivity(i);
+                }
+                break;
+            case R.id.user_customer:
+                if(checked) {
+                    Intent in = new Intent(login.this, Customer.class);
+                    startActivity(in);
+                }
+                break;
+        }
+    /*Intent i=new Intent(login.this,retailer.class);
+        startActivity(i);*/
+    }
+
+    public void meth_signup(View vw)
+    {
+        Intent i=new Intent(login.this,signUp.class);
+        startActivity(i);
+    }
+
+
+    public class SigninActivity extends AsyncTask<String, Void, String> {
+        private Context context;
+        EditText e1;
+
+        public SigninActivity(Context context) {
+            this.context = context;
+            // this.e1 = e1;
+        }
+
+        public String doInBackground(String... arg0) {
+            try {
+                un = (String) arg0[0];
+                //BigInteger ph=new BigInteger(phone);
+                pwd = (String) arg0[1];
+
+
+                String link = "http://cabvit.esy.es/loginworkBabi.php";
+                String data = "username" + "=" + un;
+                data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(pwd, "UTF-8");
+
+                URL url = new URL(link);
+                URLConnection conn = url.openConnection();
+
+                conn.setDoOutput(true);
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+
+                wr.write(data);
+                wr.flush();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                // Read Server Response
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                    break;
+                }
+                return sb.toString();
+            } catch (Exception e) {
+                return new String("Exception: " + e.getMessage());
+            }
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            //String res=result.trim();
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+
+            if (result.equals("yes")) {
+
+                SharedPreferences sharedPreferences=login.this.getSharedPreferences(getString(R.string.pref_file),MODE_PRIVATE);
+                SharedPreferences.Editor editor=sharedPreferences.edit();
+                editor.putString(getString(R.string.pref_username),prf_un.getText().toString());
+                editor.commit();
+
+                /*SharedPreferences sharedPreferences=getSharedPreferences(getString(R.string.pref_file),MODE_PRIVATE);
+                sharedPreferences.edit().putString(getString(R.string.pref_username),prf_un.getText().toString());*/
+
+                Intent intent = new Intent(login.this, Customer.class);
+                //Toast.makeText(context, "Login Successful", Toast.LENGTH_LONG).show();
+                startActivity(intent);
+                //MainActivity.this.finish();
+
+
+            }
+            else if(result.equals("no"))
+            {
+                //Intent intent = new Intent(Signin.this, MainActivity.class);
+                Toast.makeText(context, "Login failed!! Please check your internet connection and Try again...", Toast.LENGTH_LONG).show();
+                //startActivity(intent);
+                // Signin.this.finish();
+            }
+
+        }
+    }
+
+
+}

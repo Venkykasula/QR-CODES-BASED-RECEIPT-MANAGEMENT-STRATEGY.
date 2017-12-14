@@ -1,0 +1,31 @@
+package com.example.venky.qrcodedreceipts;
+
+import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.view.Menu;
+
+
+public class CustometList extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_customet_list);
+        Bundle extras = getIntent().getExtras();
+        String result_text = extras.getString("result_text");
+
+
+        String[] res_str = result_text.split(";", result_text.length());
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.activity_list2, res_str);
+
+        ListView lv = (ListView) findViewById(R.id.listView);
+        lv.setAdapter(adapter);
+
+    }
+}

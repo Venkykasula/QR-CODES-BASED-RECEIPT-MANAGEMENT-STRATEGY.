@@ -1,0 +1,8 @@
+<?php
+	define('HOST','mysql.hostinger.in');
+	define('USER','u482683992_babi');
+	define('PASS','babitha');
+	define('DB','u482683992_qr');
+	
+	$con = mysqli_connect(HOST,USER,PASS,DB) or die('Unable to Connect');
+?>

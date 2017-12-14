@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/changepwd1"
+    tools:context="com.example.venky.qrcodedreceipts.Customer">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MyQR Id"
+        android:onClick="show_MyQR"
+        android:id="@+id/button11"
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/textView14"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Customer"
+        android:id="@+id/textView14"
+        android:onClick="scan_receipt"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan preview"
+        android:id="@+id/preview"
+        android:layout_below="@+id/button11"
+        android:layout_alignParentLeft="true"
+        android:onClick="prvw"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan Receipts"
+        android:id="@+id/button12"
+        android:layout_below="@+id/preview"
+        android:layout_alignParentLeft="true"
+        android:onClick="scan_receipt"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="purchase list"
+        android:id="@+id/button13"
+        android:onClick="searchUsing"
+        android:layout_below="@+id/button12"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        android:onClick="update_password"
+        android:id="@+id/chng_pwd"
+        android:layout_below="@+id/button13"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:id="@+id/button14"
+        android:layout_below="@+id/chng_pwd"
+        android:layout_alignParentLeft="true"
+        android:onClick="logout_meth"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>
